@@ -1,104 +1,72 @@
-var eleccionMaquina;
-var ContadorDeEmpates=0;
-var ContadorDeGanadas=0;
-var ContadorDePerdidas=0;
 
-function comenzar()
-{
-	//Genero el número RANDOM entre 1 y 3
-	 	numeroSecreto =Math.floor( Math.random()*3)+1;
-		//alert(numeroSecreto);
-		switch(numeroSecreto)
-		{
-			case 1:
-				eleccionMaquina="piedra";
-				break;
-			case 2:
-				eleccionMaquina="papel";
-				break;
-			case 3:
-				eleccionMaquina="tijera";
-				break;
+var npc;
+var player;
 
-		}
-		//alert(eleccionMaquina);
+var empatadas = 0;
+var ganadas = 0;
+var perdidas = 0;
 
+function comenzar() {
+	npc = Math.floor(Math.random() * 3 + 1);
+}
 
+function piedra() {
+	player = 1;
+	resultado();
+}
 
-}//FIN DE LA FUNCIÓN
-function piedra()
-{
-	alert("la maquina selecciono: "+eleccionMaquina);
-	eleccionHumano="piedra";
-	if(eleccionHumano==eleccionMaquina)
-	{
-		alert("empate.");	
-		ContadorDeEmpates++;	
+function papel() {
+	player = 2;
+	resultado();
+}
+
+function tijera() {
+	player = 3;
+	resultado();
+}
+
+function resultado() {
+
+	if(player == npc) {
+		empatadas++;
+		window.alert('Empate!');
+		document.getElementById('empatadas').value = 'Empatadas: ' + empatadas;
+		comenzar();
+
+	} else if (player == 1 && npc == 2) {
+		perdidas++;
+		window.alert('Gana la máquina!');
+		document.getElementById('perdidas').value = 'Perdidas: ' + perdidas;
+		comenzar();
+
+	} else if (player == 1 && npc == 3) {
+		ganadas++;
+		window.alert('Ganas tú!');
+		document.getElementById('ganadas').value = 'Ganadas: ' + ganadas;
+		comenzar();
+
+	} else if (player == 2 && npc == 3) {
+		perdidas++;
+		window.alert('Gana la máquina!');
+		document.getElementById('perdidas').value = 'Perdidas: ' + perdidas;
+		comenzar();
+
+	} else if (player == 2 && npc == 1) {
+		ganadas++;
+		window.alert('Ganas tú!');
+		document.getElementById('ganadas').value = 'Ganadas: ' + ganadas;
+		comenzar();
+
+	} else if (player == 3 && npc == 1) {
+		perdidas++;
+		window.alert('Gana la máquina!');
+		document.getElementById('perdidas').value = 'Perdidas: ' + perdidas;
+		comenzar();
+
+	} else if (player == 3 && npc == 2) {
+		ganadas++;
+		window.alert('Ganas tú!');
+		document.getElementById('ganadas').value = 'Ganadas: ' + ganadas;
+		comenzar();
 	}
-	else if(eleccionMaquina=="tijera")
-	{
-		alert("vos ganastes.");
-		ContadorDeGanadas++;
-	}
-	else
-	{
-		alert("ganó la Maquina.");
-		ContadorDePerdidas++;
-	}
-
-mostarResultado();
-
-}//FIN DE LA FUNCIÓN
-function papel()
-{
-	alert("la maquina selecciono: "+eleccionMaquina);
-	eleccionHumano="papel";
-	if(eleccionHumano==eleccionMaquina)
-	{
-		alert("empate.");
-		ContadorDeEmpates++;		
-
-	}
-	else if(eleccionMaquina=="piedra")
-	{
-		alert("vos ganastes.");
-		ContadorDeGanadas++;
-	}
-	else
-	{
-		alert("ganó la Maquina.");
-		ContadorDePerdidas++;
-	}
-mostarResultado();
-}//FIN DE LA FUNCIÓN
-function tijera()
-{
-	alert("la maquina selecciono: "+eleccionMaquina);
-	eleccionHumano="tijera";
-	if(eleccionHumano==eleccionMaquina)
-	{
-		alert("empate.");
-		ContadorDeEmpates++;		
-	}
-	else if(eleccionMaquina=="papel")
-	{
-		alert("vos ganastes.");
-		ContadorDeGanadas++;
-	}
-	else
-	{
-		alert("ganó la Maquina.");
-		ContadorDePerdidas++;
-	}
-mostarResultado();
-}//FIN DE LA FUNCIÓN
-
-function mostarResultado()
-{
-
-document.getElementById('empatadas').value=ContadorDeEmpates + " partidas empatadas.";
-document.getElementById('perdidas').value=ContadorDePerdidas + " partidas perdidas.";
-document.getElementById('ganadas').value=ContadorDeGanadas + " partidas ganadas.";
-
-comenzar();
 }
